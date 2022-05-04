@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preço mudou</title>
+    <style>
+        body {
+            font: 12pt Arial;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Preço mudou</h1>
+    <button onclick="verificar()">Verificar</button>
+    <section id='resultado'>
+        <p>Clique no botão acima para verificar a mudança de preço.</p>
+    </section>
+    <script>
+        function verificar() {
+            let toReal = Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            let porcentFormat = Intl.NumberFormat('pt-br');
+
+            let pAnterior = Number(window.prompt(`Qual era o preço anterior do produto?`));
+            let pAtual = Number(window.prompt(`Qual é o preço atual do produto?`));
+
+            let pDif = pAnterior - pAtual;
+            let isAumento = pDif < 0;
+            pDif = Math.abs(pDif);
+            let porcent = pDif / (isAumento ? pAnterior : pAtual) * 100;
+
+            let saida = document.getElementById('resultado');
+            saida.innerHTML = '<h1>Analisando os valores informados</h1>'
+            saida.innerHTML += `<p>O produto custava ${toReal.format(pAnterior)} e agora custa ${toReal.format(pAtual)}.</p>`;
+            saida.innerHTML += `<p>Hoje o produto está mais ${isAumento ? "caro" : "barato"}.</p>`;
+            saida.innerHTML += `<p>O preço ${isAumento ? "subiu" : "caiu"} ${toReal.format(pDif)} em relação ao preço anterior.</p>`;
+            saida.innerHTML += `<p>Uma variação de ${porcentFormat.format(porcent)}% pra ${isAumento ? "cima" : "baixo"}.</p>`;
+        }
+    </script>
+</body>
+</html>

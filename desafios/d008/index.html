@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Desconto</title>
+    <style>
+        body {
+            font: 12pt Arial;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cálculo de Desconto</h1>
+    <button onclick="desconto()">Desconto de 10%</button>
+    <section id='resultado'>
+        <p>Clique no botão acima para iniciar.</p>
+    </section>
+    <script>
+        function desconto() {
+            let formatReal = Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            let res = document.getElementById('resultado');
+            let prod = window.prompt('Qual é o produto que você está comprando?');
+            let preco = Number(window.prompt(`Qual é o preço de ${prod}`));
+            let desconto = preco * 0.1;
+            let novoPreco = preco - desconto;
+            res.innerHTML = `<h1>Calculando desconto de 10% para ${prod}</h1>`;
+            res.innerHTML += `<p>O preço original era ${formatReal.format(preco)}.</p>`;
+            res.innerHTML += `<p>Você acaba de ganhar ${formatReal.format(desconto)} de desconto (-10%).</p>`;
+            res.innerHTML += `<p>No fim, você vai pagar ${formatReal.format(novoPreco)} no produto ${prod}.</p>`;
+        }
+    </script>
+</body>
+</html>

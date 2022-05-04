@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situação do aluno</title>
+    <style>
+        body {
+            font: 12pt Arial;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 30px;
+        }
+
+        span.verde {
+            background-color: rgba(0, 245, 0, 0.466);
+            color: rgb(0, 94, 0);
+        }
+
+        span.amarelo {
+            background-color: rgba(229, 255, 0, 0.37);
+            color: rgb(97, 104, 0);
+        }
+        
+        span.vermelho {
+            background-color: rgba(255, 0, 0, 0.356);
+            color: rgb(94, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <h1>Situação do aluno</h1>
+    <button onclick="verificar()">Entrar com as notas</button>
+    <section id='resultado'>
+        <p>Clique no botão acima para informar as notas do aluno.</p>
+    </section>
+    <script>
+        function verificar() {
+
+            let brFormat = Intl.NumberFormat('pt-br');
+
+            let nome = window.prompt(`Qual é o nome do aluno?`);
+            let n1 = Number(window.prompt(`Primeira nota de ${nome}:`));
+            let n2 = Number(window.prompt(`Segunda nota de ${nome}:`));
+
+            let media = (n1 + n2) / 2;
+
+            let saida = document.getElementById('resultado');
+            
+            let resposta;
+
+            if (media > 6) {
+                resposta = `<p>Com média acima de 6,0, o aluno está <span class="verde"><strong>APROVADO</strong></span>.</p>`;
+            } else if (media >= 3) {
+                resposta = `<p>Com média entre 3,0 e 6,0, o aluno está em <span class="amarelo"><strong>RECUPERAÇÃO</strong></span>.</p>`;
+            } else {
+                resposta = `<p>Com média abaixo de 3,0, o aluno está <span class="vermelho"><strong>REPROVADO</strong></span>.</p>`;
+            }
+
+            saida.innerHTML = `<h1>Analisando a situação de ${nome}</h1>`;
+            saida.innerHTML += `<p>Com as notas ${brFormat.format(n1)} e ${brFormat.format(n2)}, a <strong>média é ${brFormat.format(media)}</strong>.</p>`;
+            saida.innerHTML += resposta;
+
+        }
+    </script>
+</body>
+</html>

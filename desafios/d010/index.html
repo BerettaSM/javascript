@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórmula de Bhaskara</title>
+    <style>
+        body {
+            font: 12pt Arial;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resolvendo Bhaskara</h1>
+    <button onclick="calcular()">Calcular</button>
+    <section id='resultado'>
+        <p>Considerando uma equação no formato <strong>a</strong>x<sup>2</sup> <strong>+ b</strong>x <strong>+ c</strong> = 0, aperte o botão acima para calcular o valor de &Delta;.</p>
+    </section>
+    <script>
+        function calcular() {
+            let formatReal = Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            let res = document.getElementById('resultado');
+
+            let a = Number(window.prompt(`Qual é valor de a?`));
+            let b = Number(window.prompt(`Qual é valor de b?`));
+            let c = Number(window.prompt(`Qual é valor de c?`));
+
+            let delta = b ** 2 - 4 * a * c;
+
+            res.innerHTML = '<h1>Resolvendo Bhaskara</h1>';
+            res.innerHTML += `<p>A equação atual é ${eqStr(a, b, c)}</p>`;
+            res.innerHTML += `<p>O cálculo realizado será ${calcStr(a, b, c)}</p>`;
+            res.innerHTML += `<p>O valor calculado foi <strong><mark>&Delta; = ${delta}</mark></strong></p>`;
+        }
+        function eqStr (a, b, c) {
+            return `<strong>${a}x<sup>2</sup> + ${b}x + ${c} = 0</strong>`;
+        }
+        function calcStr (a, b, c) {
+            return `<strong>&Delta; = ${b}<sup>2</sup> - 4 . ${a} . ${c}</strong>`;
+        }
+    </script>
+</body>
+</html>

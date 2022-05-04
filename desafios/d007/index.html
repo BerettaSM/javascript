@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor R$ &rarr; US$</title>
+    <style>
+        body {
+            font: 12pt Arial;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body onload="pegarCotacao()">
+    <h1>Conversor R$ &rarr; US$</h1>
+    <button onclick="converter()">Converter</button>
+    <section id='resultado'>
+        <p>Clique no botão acima para iniciar.</p>
+    </section>
+    <script>
+        let cotacao;
+
+        function converter() {
+            if (cotacao === 0) {
+                window.alert('ERRO! Cotação não foi informada. Recarregue a página.')
+                return;
+            }
+
+            let toDolar = Intl.NumberFormat('en-us', {
+                style: 'currency',
+                currency: 'USD'
+            });
+            let toReal = Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            let res = document.getElementById('resultado');
+            let real = Number(window.prompt('Quantos R$ você tem na carteira?'));
+            let dolar = real / cotacao;
+
+            res.innerHTML = `<h1>Convertendo...</h1>`;
+            res.innerHTML += `<p>Com ${toReal.format(real)} você conseguirá comprar ${toDolar.format(dolar)} dólares.</p>`;
+        }
+        function pegarCotacao() {
+            cotacao = Number(window.prompt('Antes de mais nada, quanto está a cotação do dólar agora?'));
+        }
+    </script>
+</body>
+</html>
